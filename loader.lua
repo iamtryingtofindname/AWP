@@ -1,3 +1,4 @@
+register_key = isfile("Helios/key.txt") and readfile("Helios/key.txt") or ""
 
 ([[
     This script has been licensed using Luauth
