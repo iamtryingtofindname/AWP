@@ -924,9 +924,11 @@ do
         local tweenDuration = 0.35
 
         local function destroy()
-            inner:TweenPosition(UDim2.fromScale(-1.5,0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,tweenDuration,true)
-            task.wait(tweenDuration)
-            notif:Destroy()
+            pcall(function()
+                inner:TweenPosition(UDim2.fromScale(-1.5,0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,tweenDuration,true)
+                task.wait(tweenDuration+0.1)
+                notif:Destroy()
+            end)
         end
 
         inner.Yes.Button.Activated:Connect(function()
