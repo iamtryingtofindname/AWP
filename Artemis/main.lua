@@ -8,8 +8,8 @@
 ██║░░██║██║░░██║░░░██║░░░███████╗██║░╚═╝░██║██║██████╔╝
 ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝╚═╝╚═════╝░
 
-UI library made by iamtryingtofindname#9879
-Used by Kratos script by iamtryingtofindname#9879
+UI library made by RoadToGlory#9879
+Used by Kratos script by RoadToGlory#9879
 
 You are welcome for not obfuscating, use, give credit, I don't really care
 
@@ -26,8 +26,6 @@ local MP = game:GetService("MarketplaceService")
 -- VARIABLES
 local player = Players.LocalPlayer
 local mouse = player:GetMouse()
-
--- PRIVATE VARIABLES
 
 -- CLASSES
 local library = {}
@@ -638,8 +636,33 @@ do
                 return Loader
             end
 
+            local function makeNotifHolder()
+                -- Gui to Lua
+                -- Version: 3.2
+
+                -- Instances:
+
+                local Notifications = Instance.new("Frame")
+                local UIListLayout = Instance.new("UIListLayout")
+
+                --Properties:
+
+                Notifications.Name = "Notifications"
+                Notifications.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Notifications.BackgroundTransparency = 1.000
+                Notifications.Position = UDim2.new(0.0173787102, 0, 0, 0)
+                Notifications.Size = UDim2.new(0, 262, 0.969097674, 0)
+
+                UIListLayout.Parent = Notifications
+                UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+                UIListLayout.Padding = UDim.new(0, 6)
+
+                return Notifications
+            end
+
             local mainFrame = makeMain()
             local loaderFrame = makeLoader()
+            local notifHolder = makeNotifHolder()
 
             mainFrame.Background.Top.Title.Text = name
             mainFrame.Background.Top.Version.Text = tostring(special["Version"] or "")
@@ -651,6 +674,7 @@ do
 
             mainFrame.Parent = UI
             loaderFrame.Parent = UI
+            notifHolder.Parent = UI
 
             -- dragging
             local dragEvents = utility:InitDragging(mainFrame,mainFrame.Background.Top.Button)
@@ -682,6 +706,7 @@ do
                 ["main"] = mainFrame;
                 ["loader"] = loaderFrame;
                 ["special"] = special;
+                ["notifHolder"] = notifHolder;
                 -- used internally
                 ["_drag_events"] = dragEvents;
                 ["_page_num"] = 1;
@@ -714,7 +739,7 @@ do
             -- Enable the loader and disable everything else
             for _,v in pairs(container:GetChildren()) do
                 if v:IsA("Frame") then
-                    v.Visible = v == loader
+                    v.Visible = v==loader or v==self.notifHolder
                 end
             end
             -- Animate the loading circle
@@ -722,7 +747,7 @@ do
         end)
     end
 
-    function library:StopLoading()
+    function library:StopLoading(actionText)
         local called
         local function callback()
             if not called then
@@ -732,12 +757,13 @@ do
                 local main = self.main
                 for _,v in pairs(self.container:GetChildren()) do
                     if v:IsA("Frame") then
-                        v.Visible = v == main
+                        v.Visible = v == main or v == self.notifHolder
                     end
                 end
             end
         end
 
+        self.loader.Status.Load.Inner.Title.Text = actionText or "Load Script"
         self.loader.Status.Loading.Visible = false
         self.loader.Status.Load.Visible = true
 
@@ -754,6 +780,176 @@ do
             toggle = not self.main.Visible
         end
         self.main.Visible = toggle
+    end
+
+    function library:Destroy()
+        library.container:Destroy()
+        for _,v in pairs(library._drag_events) do
+            pcall(function()
+                v:Disconnect()
+            end)
+        end
+        for _,v in pairs(library._section_update) do
+            pcall(function()
+                v:Disconnect()
+            end)
+        end
+        library = nil
+    end
+
+    function library:Notify(title,body,callback,duration,xMarkEnabled)
+        title = title or "Title"
+        body = body or "Body"
+
+        callback = callback or function() end
+
+        local function makeNotif()
+            -- Gui to Lua
+            -- Version: 3.2
+
+            -- Instances:
+
+            local Example = Instance.new("Frame")
+            local Inner = Instance.new("Frame")
+            local UICorner = Instance.new("UICorner")
+            local No = Instance.new("ImageLabel")
+            local Button = Instance.new("TextButton")
+            local Yes = Instance.new("ImageLabel")
+            local Button_2 = Instance.new("TextButton")
+            local Body = Instance.new("TextLabel")
+            local Title = Instance.new("TextLabel")
+
+            --Properties:
+
+            Example.Name = "Notif"
+            Example.BackgroundColor3 = Color3.fromRGB(255,255,255)
+            Example.Position = UDim2.new(0, 0, 0.917525768, 0)
+            Example.BackgroundTransparency = 1.000
+            Example.Size = UDim2.new(1, 0, 0.00773195876, 54)
+            Example.ZIndex = 20
+
+            Inner.Name = "Inner"
+            Inner.Parent = Example
+            Inner.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+            Inner.BackgroundTransparency = 0
+            Inner.Size = UDim2.new(1, 0, 1, 0)
+            Inner.ZIndex = 200
+
+            UICorner.CornerRadius = UDim.new(0, 6)
+            UICorner.Parent = Inner
+
+            No.Name = "No"
+            No.Parent = Inner
+            No.AnchorPoint = Vector2.new(1, 0.600000024)
+            No.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            No.BackgroundTransparency = 1.000
+            No.Position = UDim2.new(0.970000029, 0, 0.75, 0)
+            No.Size = UDim2.new(0, 20, 0, 20)
+            No.Image = "http://www.roblox.com/asset/?id=10259890025"
+            No.ZIndex = 300
+
+            Button.Name = "Button"
+            Button.Parent = No
+            Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Button.BackgroundTransparency = 1.000
+            Button.Size = UDim2.new(1, 0, 1, 0)
+            Button.Font = Enum.Font.SourceSans
+            Button.Text = ""
+            Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Button.TextSize = 14.000
+            Button.ZIndex = 400
+
+            Yes.Name = "Yes"
+            Yes.Parent = Inner
+            Yes.AnchorPoint = Vector2.new(1, 0.400000006)
+            Yes.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Yes.BackgroundTransparency = 1.000
+            Yes.Position = UDim2.new(0.970000029, 0, 0.25, 0)
+            Yes.Size = UDim2.new(0, 20, 0, 20)
+            Yes.Image = "rbxassetid://10567592039"
+            Yes.ZIndex = 300
+
+            Button_2.Name = "Button"
+            Button_2.Parent = Yes
+            Button_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Button_2.BackgroundTransparency = 1.000
+            Button_2.Size = UDim2.new(1, 0, 1, 0)
+            Button_2.Font = Enum.Font.SourceSans
+            Button_2.Text = ""
+            Button_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Button_2.TextSize = 14.000
+            Button_2.ZIndex = 400
+
+            Body.Name = "Body"
+            Body.Parent = Inner
+            Body.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Body.BackgroundTransparency = 1.000
+            Body.Position = UDim2.new(0.0529999956, 0, 0.400000006, 0)
+            Body.Size = UDim2.new(0, 208, 0, 29)
+            Body.Font = Enum.Font.Gotham
+            Body.Text = "Body"
+            Body.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Body.TextSize = 13.000
+            Body.TextWrapped = true
+            Body.TextXAlignment = Enum.TextXAlignment.Left
+            Body.ZIndex = 300
+
+            Title.Name = "Title"
+            Title.Parent = Inner
+            Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Title.BackgroundTransparency = 1.000
+            Title.Position = UDim2.new(0.0529999994, 0, 0.109999999, 0)
+            Title.Size = UDim2.new(0, 118, 0, 15)
+            Title.Font = Enum.Font.GothamMedium
+            Title.Text = "Title"
+            Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Title.TextScaled = true
+            Title.TextSize = 14.000
+            Title.TextWrapped = true
+            Title.TextXAlignment = Enum.TextXAlignment.Left
+            Title.ZIndex = 300
+
+            return Example
+        end
+
+        local notif = makeNotif()
+        local inner = notif.Inner
+
+        notif.Name = tostring(os.clock())
+
+        inner.Title.Text = title
+        inner.Body.Text = body
+        inner.No.Visible = xMarkEnabled and true
+
+        local tweenDuration = 0.35
+
+        local function destroy()
+            inner:TweenPosition(UDim2.fromScale(-1.5,0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,tweenDuration,true)
+            task.wait(tweenDuration)
+            notif:Destroy()
+        end
+
+        inner.Yes.Button.Activated:Connect(function()
+            callback(true)
+            destroy()
+        end)
+
+        inner.No.Button.Activated:Connect(function()
+            callback(false)
+            destroy()
+        end)
+
+        coroutine.wrap(function()
+            duration = duration or 4
+            task.wait(duration)
+            if notif then
+                destroy()
+            end
+        end)()
+
+        inner.Position = UDim2.fromScale(-1.5,0)
+        notif.Parent = self.notifHolder
+        inner:TweenPosition(UDim2.fromScale(0,0),Enum.EasingDirection.In,Enum.EasingStyle.Sine,tweenDuration,true)
     end
 end
 
@@ -2450,11 +2646,14 @@ do
             end
         end
     end
+
     function section:UpdateDropdown(dropdown,list)
+        for i,v in pairs(list) do
+            list[i] = tostring(v)
+        end
+
         local scrollingFrame = dropdown.Dropdown.Frame.ScrollingFrame
         local callback = dropdown.callback
-
-        self:ClearDropdown(dropdown)
 
         local function makeDropdownButton()
             -- Gui to Lua
@@ -2518,12 +2717,39 @@ do
             return DropdownButton
         end
 
-        for i,v in ipairs(list) do
+        local toChange = {}
+
+        for _,v in ipairs(dropdown.Dropdown.Frame.ScrollingFrame:GetChildren()) do
+            if v:IsA("Frame") and v.Name ~= "0_padding" and v.Name ~= "padding" then
+                table.insert(toChange,v)
+            end
+        end
+
+        local toChange2 = {}
+
+        for i,v in ipairs(toChange) do
+            if i>#list then
+                v:Destroy()
+            else
+                table.insert(toChange2,v)
+            end
+        end
+
+        for i=1,#list-#toChange2 do
             local button = makeDropdownButton()
-            button.Name = i.."_"..v
+            local body = Instance.new("StringValue")
+            body.Name = "Body"
+            body.Parent = button
             utility:HandleButton(button,function()
-                callback:Fire(v,i)
+                callback:Fire(body.Value,i)
             end)
+            table.insert(toChange2,button)
+        end
+
+        for i,v in ipairs(list) do
+            local button = toChange2[i]
+            button.Body.Value = v
+            button.Name = i.."_"..v
             button.Inner.Title.Text = v
             button.Parent = scrollingFrame
         end
