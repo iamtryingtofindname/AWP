@@ -242,6 +242,7 @@ do
                 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Main.AnchorPoint = Vector2.new(0.5,0.5)
                 Main.Size = UDim2.new(0, 476, 0, 581)
+                Main.Visible = false -- not until after loading
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Main
@@ -474,6 +475,7 @@ do
                 Loader.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
                 Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Loader.Size = UDim2.new(0, 330, 0, 474)
+                Loader.Visible = false
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Loader
@@ -769,6 +771,15 @@ do
 
 
         utility:HandleButton(self.loader.Status.Load,callback)
+    end
+
+    function library:SkipLoading()
+        local main = self.main
+        for _,v in pairs(self.container:GetChildren()) do
+            if v:IsA("Frame") then
+                v.Visible = v == main or v == self.notifHolder
+            end
+        end
     end
 
     function library:CreatePage(...)
