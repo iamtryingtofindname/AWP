@@ -482,6 +482,7 @@ do
 
                 GameIcon.Name = "GameIcon"
                 GameIcon.Parent = Loader
+                GameIcon.BackgroundTransparency = 1
                 GameIcon.AnchorPoint = Vector2.new(0.5, 0)
                 GameIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                 GameIcon.BorderSizePixel = 0
