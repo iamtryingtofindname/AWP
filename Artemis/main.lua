@@ -493,7 +493,7 @@ do
                 Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Loader.Size = UDim2.new(0, 330, 0, 474)
                 Loader.Visible = false
-                utility:SetModal(loader)
+                utility:SetModal(Loader)
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Loader
