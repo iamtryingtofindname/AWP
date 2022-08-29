@@ -243,6 +243,7 @@ do
                 Main.AnchorPoint = Vector2.new(0.5,0.5)
                 Main.Size = UDim2.new(0, 476, 0, 581)
                 Main.Visible = false -- not until after loading
+                Main.Modal = true
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Main
@@ -476,6 +477,7 @@ do
                 Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Loader.Size = UDim2.new(0, 330, 0, 474)
                 Loader.Visible = false
+                Loader.Modal = true
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Loader
