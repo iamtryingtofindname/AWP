@@ -111,6 +111,22 @@ do
         return "rbxassetid://"..thumbnailId
     end
 
+    function utility:SetModal(obj)
+        local m = Instance.new("TextButton")
+        m.Text = ""
+        m.BackgroundTransparency = 1
+        m.Modal = true
+        m.TextTransparency = 1
+        m.Size = UDim2.fromOffset(1,1)
+        m.ZIndex = -25
+        m.Visible = true
+        m.Active = true
+        m.AutoButtonColor = false
+        m.Name = "__modal"
+        m.Parent = obj
+        return obj
+    end
+
     function utility:Tween(object,properties,duration,...)
         assert(object and properties and duration,"Missing arguments for utility::Tween")
         local tween = TS:Create(object,TweenInfo.new(duration,...),properties)
@@ -243,7 +259,7 @@ do
                 Main.AnchorPoint = Vector2.new(0.5,0.5)
                 Main.Size = UDim2.new(0, 476, 0, 581)
                 Main.Visible = false -- not until after loading
-                Main.Modal = true
+                utility:SetModal(Main)
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Main
@@ -477,7 +493,7 @@ do
                 Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Loader.Size = UDim2.new(0, 330, 0, 474)
                 Loader.Visible = false
-                Loader.Modal = true
+                utility:SetModal(loader)
 
                 UICorner.CornerRadius = UDim.new(0, 6)
                 UICorner.Parent = Loader
