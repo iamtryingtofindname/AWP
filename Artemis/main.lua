@@ -9,9 +9,7 @@
 ╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝╚═╝╚═════╝░
 
 UI library made by RoadToGlory#9879
-Used by Kratos script by RoadToGlory#9879
-
-You are welcome for not obfuscating, use, give credit, I don't really care
+Used by AWP script by RoadToGlory#9879
 
 ]]--
 
@@ -623,7 +621,7 @@ do
                 Title_2.Position = UDim2.new(0.5, 0, 0.5, 0)
                 Title_2.Size = UDim2.new(0.927512109, 0, 0.449999958, 0)
                 Title_2.Font = Enum.Font.GothamBold
-                Title_2.Text = "Load Kratos"
+                Title_2.Text = "INTERNAL ERROR"
                 Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
                 Title_2.TextScaled = true
                 Title_2.TextSize = 14.000
@@ -1809,6 +1807,290 @@ do
         local defaultPercent = math.clamp((default-min)/(max-min),0,1)
         slider.Slider.Inside.Size = UDim2.fromScale(defaultPercent,1)
         slider.Value.Text = utility:FormatNumber(default,decimalPlaces)
+
+        slider.Name = string.rep("|",thisElementNum).."_"..title
+        slider.Parent = self.frame.Contents
+
+        return slider
+    end
+
+    function section:CreateSliderToggle(title,min,max,default,callback,onToggle,hardLimit,decimalPlaces)
+        assert(title and min and max and min<max,"Invalid arguments")
+        decimalPlaces = decimalPlaces or 1
+        default = default or min
+        callback = callback or utility.BlankFunction
+        onToggle = onToggle or utility.BlankFunction
+        local function makeSliderToggle()
+            -- Gui to Lua
+            -- Version: 3.2
+
+            -- Instances:
+
+            local SliderToggle1 = Instance.new("Frame")
+            local UICorner = Instance.new("UICorner")
+            local Title = Instance.new("TextLabel")
+            local Slider = Instance.new("Frame")
+            local ImageLabel = Instance.new("ImageLabel")
+            local Inside = Instance.new("Frame")
+            local ImageLabel_2 = Instance.new("ImageLabel")
+            local Button = Instance.new("TextButton")
+            local Value = Instance.new("TextBox")
+            local Toggle = Instance.new("ImageLabel")
+            local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+            local Switch = Instance.new("ImageLabel")
+            local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+            local Button_2 = Instance.new("TextButton")
+
+            --Properties:
+
+            SliderToggle1.Name = "SliderToggle"
+            SliderToggle1.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+            SliderToggle1.BorderSizePixel = 0
+            SliderToggle1.Size = UDim2.new(1, 0, 0, 50)
+            SliderToggle1.ZIndex = 400
+
+            UICorner.CornerRadius = UDim.new(0, 4)
+            UICorner.Parent = SliderToggle1
+
+            Title.Name = "Title"
+            Title.Parent = SliderToggle1
+            Title.AnchorPoint = Vector2.new(0, 0.5)
+            Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Title.BackgroundTransparency = 1.000
+            Title.Position = UDim2.new(0.0350000151, 0, 0.319999993, 0)
+            Title.Size = UDim2.new(0, 213, 0, 14)
+            Title.Font = Enum.Font.Gotham
+            Title.Text = "Fly"
+            Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Title.TextScaled = true
+            Title.TextSize = 14.000
+            Title.TextWrapped = true
+            Title.TextXAlignment = Enum.TextXAlignment.Left
+            Title.ZIndex = 800
+
+            Slider.Name = "Slider"
+            Slider.Parent = SliderToggle1
+            Slider.Active = true
+            Slider.AnchorPoint = Vector2.new(0.5, 0.5)
+            Slider.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            Slider.BackgroundTransparency = 1.000
+            Slider.Position = UDim2.new(0.439595968, 0, 0.75, 0)
+            Slider.Size = UDim2.new(0.804192126, 0, 0.100000001, 0)
+            Slider.ZIndex = 800
+
+            ImageLabel.Parent = Slider
+            ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ImageLabel.BackgroundTransparency = 1.000
+            ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+            ImageLabel.Image = "rbxassetid://4504304159"
+            ImageLabel.ImageColor3 = Color3.fromRGB(24, 24, 24)
+            ImageLabel.ScaleType = Enum.ScaleType.Slice
+            ImageLabel.SliceCenter = Rect.new(100, 100, 100, 100)
+            ImageLabel.ZIndex = 810
+
+            Inside.Name = "Inside"
+            Inside.Parent = Slider
+            Inside.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+            Inside.BackgroundTransparency = 1.000
+            Inside.Size = UDim2.new(0.5, 0, 1, 0)
+            Inside.ZIndex = 820
+
+            ImageLabel_2.Parent = Inside
+            ImageLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ImageLabel_2.BackgroundTransparency = 1.000
+            ImageLabel_2.Size = UDim2.new(1, 0, 1, 0)
+            ImageLabel_2.Image = "rbxassetid://4504304159"
+            ImageLabel_2.ScaleType = Enum.ScaleType.Slice
+            ImageLabel_2.SliceCenter = Rect.new(100, 100, 100, 100)
+            ImageLabel_2.ZIndex = 830
+
+            Button.Name = "Button"
+            Button.Parent = Slider
+            Button.AnchorPoint = Vector2.new(0, 0.5)
+            Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Button.BackgroundTransparency = 1.000
+            Button.Position = UDim2.new(0, 0, 0.5, 0)
+            Button.Size = UDim2.new(1, 0, 2, 0)
+            Button.Font = Enum.Font.SourceSans
+            Button.Text = ""
+            Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Button.TextSize = 14.000
+            Button.ZIndex = 900
+
+            Value.Name = "Value"
+            Value.Parent = SliderToggle1
+            Value.AnchorPoint = Vector2.new(1, 0.5)
+            Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Value.BackgroundTransparency = 1.000
+            Value.Position = UDim2.new(0.964999974, 0, 0.319999993, 0)
+            Value.Size = UDim2.new(0, 52, 0, 14)
+            Value.Font = Enum.Font.Gotham
+            Value.Text = "test"
+            Value.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Value.TextSize = 14.000
+            Value.TextXAlignment = Enum.TextXAlignment.Right
+            Value.ZIndex = 800
+
+            Toggle.Name = "Toggle"
+            Toggle.Parent = SliderToggle1
+            Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
+            Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Toggle.BackgroundTransparency = 1.000
+            Toggle.Position = UDim2.new(0.920000017, 0, 0.720000029, 0)
+            Toggle.Size = UDim2.new(0.101421103, 0, 0.385866523, 0)
+            Toggle.Image = "rbxassetid://10261338527"
+            Toggle.ImageColor3 = Color3.fromRGB(255, 0, 0)
+            Toggle.ScaleType = Enum.ScaleType.Slice
+            Toggle.SliceCenter = Rect.new(100, 100, 100, 100)
+            Toggle.ZIndex = 800
+
+            UIAspectRatioConstraint.Parent = Toggle
+            UIAspectRatioConstraint.AspectRatio = 2.000
+
+            Switch.Name = "Switch"
+            Switch.Parent = Toggle
+            Switch.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Switch.BackgroundTransparency = 1.000
+            Switch.Size = UDim2.new(0.5, 0, 1, 0)
+            Switch.ZIndex = 5
+            Switch.Image = "http://www.roblox.com/asset/?id=10261338527"
+            Switch.ScaleType = Enum.ScaleType.Slice
+            Switch.SliceCenter = Rect.new(100, 100, 100, 100)
+            Switch.ZIndex = 900
+
+            UIAspectRatioConstraint_2.Parent = Switch
+
+            Button_2.Name = "Button"
+            Button_2.Parent = Toggle
+            Button_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Button_2.BackgroundTransparency = 1.000
+            Button_2.Size = UDim2.new(1, 0, 1, 0)
+            Button_2.Font = Enum.Font.SourceSans
+            Button_2.Text = ""
+            Button_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Button_2.TextSize = 14.000
+            Button_2.ZIndex = 950
+
+            return SliderToggle1
+        end
+
+        local slider = makeSliderToggle()
+        slider.Title.Text = title
+
+        local thisElementNum = self._element_num
+        self._element_num = self._element_num+1
+
+        -- handle slider
+        do
+            local dragging = false
+            slider.Slider.Button.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = true
+                end
+            end)
+
+            local _last_text
+            local _focused = false
+
+            Run.RenderStepped:Connect(function()
+                if not UIS:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+                    dragging = false
+                end
+                if dragging then
+                    local left = slider.Slider.AbsolutePosition.X-(slider.Slider.AbsoluteSize.X/2)
+                    local real = mouse.X
+                    local percent = math.clamp((real-left-slider.Slider.AbsoluteSize.X/2)/slider.Slider.AbsoluteSize.X,0,1)
+                    slider.Slider.Inside.Size = UDim2.fromScale(percent,1)
+                    local value = min+((max-min)*percent)
+                    slider.Value.Text = utility:FormatNumber(value,decimalPlaces)
+                    coroutine.wrap(callback)(value)
+                end
+                if _focused == false then
+                    _last_text = slider.Value.Text
+                end
+            end)
+
+            slider.Value.Focused:Connect(function()
+                _focused = true
+            end)
+
+            slider.Value.FocusLost:Connect(function(enterPressed)
+                local newValue
+                if enterPressed then
+                    local text = slider.Value.Text
+                    local num = tonumber(text)
+                    if num then
+                        if hardLimit then
+                            num = math.clamp(num,min,max)
+                        end
+                        slider.Value.Text = utility:FormatNumber(num,decimalPlaces)
+                        newValue = num
+                        local percent = math.clamp((newValue-min)/(max-min),0,1)
+                        slider.Slider.Inside.Size = UDim2.fromScale(percent,1)
+                    else
+                        slider.Value.Text = _last_text
+                    end
+                else
+                    slider.Value.Text = _last_text
+                end
+
+                _focused = false
+
+                if newValue then
+                    coroutine.wrap(callback)(newValue)
+                end
+            end)
+
+            local defaultPercent = math.clamp((default-min)/(max-min),0,1)
+            slider.Slider.Inside.Size = UDim2.fromScale(defaultPercent,1)
+            slider.Value.Text = utility:FormatNumber(default,decimalPlaces)
+        end
+        do
+            local toggle = slider
+            -- handle toggle
+            local _toggle = default
+            local startSwitch = 0
+            local goalSwitch = 0.5
+            local durationMultiplier = 0.5 -- 0.5 seconds
+            local tween1
+            local tween2
+
+            toggle.Toggle.Switch.Position = UDim2.fromScale(default and goalSwitch or startSwitch,0)
+            toggle.Toggle.ImageColor3 = default and Color3.new(0,1,0) or Color3.new(1,0,0)
+
+            local function stopTweens()
+                pcall(function()
+                    tween1:Cancel()
+                end)
+                pcall(function()
+                    tween2:Cancel()
+                end)
+            end
+
+            local function on()
+                stopTweens()
+                local duration = math.abs(toggle.Toggle.Switch.Position.X.Scale-goalSwitch)*durationMultiplier
+                tween1 = utility:Tween(toggle.Toggle.Switch,{Position = UDim2.fromScale(goalSwitch,0)},duration)
+                tween2 = utility:Tween(toggle.Toggle,{ImageColor3 = Color3.new(0,1,0)},duration)
+            end
+
+            local function off()
+                stopTweens()
+                local duration = math.abs(toggle.Toggle.Switch.Position.X.Scale-startSwitch)*durationMultiplier
+                tween1 = utility:Tween(toggle.Toggle.Switch,{Position = UDim2.fromScale(startSwitch,0)},duration)
+                tween2 = utility:Tween(toggle.Toggle,{ImageColor3 = Color3.new(1,0,0)},duration)
+            end
+
+            toggle.Toggle.Button.Activated:Connect(function()
+                _toggle = not _toggle
+                if _toggle then
+                    on()
+                else
+                    off()
+                end
+                onToggle(_toggle)
+            end)
+        end
 
         slider.Name = string.rep("|",thisElementNum).."_"..title
         slider.Parent = self.frame.Contents
