@@ -1814,10 +1814,13 @@ do
         return slider
     end
 
-    function section:CreateSliderToggle(title,min,max,default,callback,onToggle,hardLimit,decimalPlaces)
+    function section:CreateSliderToggle(title,min,max,default,callback,onToggle,default2,hardLimit,decimalPlaces)
         assert(title and min and max and min<max,"Invalid arguments")
         decimalPlaces = decimalPlaces or 1
         default = default or min
+        if default2 == nil then
+            default2 = false
+        end
         callback = callback or utility.BlankFunction
         onToggle = onToggle or utility.BlankFunction
         local function makeSliderToggle()
@@ -2048,7 +2051,7 @@ do
         do
             local toggle = slider
             -- handle toggle
-            local _toggle = default
+            local _toggle = default2
             local startSwitch = 0
             local goalSwitch = 0.5
             local durationMultiplier = 0.5 -- 0.5 seconds
