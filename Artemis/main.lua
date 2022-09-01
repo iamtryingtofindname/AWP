@@ -1374,8 +1374,8 @@ do
         local tween1
         local tween2
 
-        toggle.Toggle.Switch.Position = UDim2.fromScale(default and goalSwitch or startSwitch,0)
-        toggle.Toggle.ImageColor3 = default and Color3.new(0,1,0) or Color3.new(1,0,0)
+        toggle.Toggle.Switch.Position = UDim2.fromScale(_toggle and goalSwitch or startSwitch,0)
+        toggle.Toggle.ImageColor3 = _toggle and Color3.new(0,1,0) or Color3.new(1,0,0)
 
         local function stopTweens()
             pcall(function()
@@ -1965,9 +1965,11 @@ do
 
             Button_2.Name = "Button"
             Button_2.Parent = Toggle
+            Button_2.AnchorPoint = Vector2.new(0.5,0.5)
             Button_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
             Button_2.BackgroundTransparency = 1.000
-            Button_2.Size = UDim2.new(1, 0, 1, 0)
+            Button_2.Size = UDim2.new(1.2, 0, 1.4, 0)
+            Button_2.Position = UDim2.fromScale(0.5,0.5)
             Button_2.Font = Enum.Font.SourceSans
             Button_2.Text = ""
             Button_2.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -2058,8 +2060,8 @@ do
             local tween1
             local tween2
 
-            toggle.Toggle.Switch.Position = UDim2.fromScale(default and goalSwitch or startSwitch,0)
-            toggle.Toggle.ImageColor3 = default and Color3.new(0,1,0) or Color3.new(1,0,0)
+            toggle.Toggle.Switch.Position = UDim2.fromScale(_toggle and goalSwitch or startSwitch,0)
+            toggle.Toggle.ImageColor3 = _toggle and Color3.new(0,1,0) or Color3.new(1,0,0)
 
             local function stopTweens()
                 pcall(function()
