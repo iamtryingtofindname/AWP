@@ -82,8 +82,8 @@ ESP._update = Run.RenderStepped:Connect(function()
                 local h = characterCache[v]
                 h.Adornee = v.Character
                 if ESP.UseTeamColor then
-                    local t = v.TeamColor and v.TeamColor.Color or BrickColor.new("Medium stone grey")
-                    h.FillColor = t
+                    local t = v.TeamColor or BrickColor.new("Medium stone grey")
+                    h.FillColor = t.Color
                 else
                     h.FillColor = ESP.PlayerColor
                 end
