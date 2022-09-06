@@ -808,6 +808,7 @@ do
             toggle = not self.main.Visible
         end
         self.main.Visible = toggle
+        return toggle
     end
 
     function library:Destroy()
