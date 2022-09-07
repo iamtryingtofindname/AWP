@@ -54,6 +54,16 @@ function ESP:DoesExist(obj)
     return false
 end
 
+function ESP:UpdateColor(obj,color)
+    for _,v in pairs(collection) do
+        if v.Adornee == obj then
+            obj.FillColor = color or Color3.new(1,1,1)
+            return true
+        end
+    end
+    return false
+end
+
 function ESP:Remove(obj)
     if cache[obj] then
         cache[obj]:Disconnect()
