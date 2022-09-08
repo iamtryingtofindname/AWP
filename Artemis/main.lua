@@ -679,6 +679,41 @@ do
                 return Notifications
             end
 
+            local function makeQueen()
+                -- Gui to Lua
+                -- Version: 3.2
+
+                -- Instances:
+
+                local Queen = Instance.new("Frame")
+                local ImageLabel = Instance.new("ImageLabel")
+                local UIGradient = Instance.new("UIGradient")
+
+                --Properties:
+
+                Queen.Name = "Queen"
+                Queen.AnchorPoint = Vector2.new(0, 1)
+                Queen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Queen.BackgroundTransparency = 1.000
+                Queen.ClipsDescendants = true
+                Queen.Position = UDim2.new(0, 0, 1, 0)
+                Queen.Size = UDim2.new(0, 125, 0, 338)
+                Queen.ZIndex = 21
+
+                ImageLabel.Parent = Queen
+                ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                ImageLabel.BackgroundTransparency = 1.000
+                ImageLabel.Position = UDim2.new(2.44140637e-07, 0, 0.344621927, 0)
+                ImageLabel.Size = UDim2.new(1.00753284, 0, 0.655377984, 0)
+                ImageLabel.ZIndex = 21
+                ImageLabel.Image = "rbxassetid://10857116675"
+                ImageLabel.ImageTransparency = 0.820
+                ImageLabel.ScaleType = Enum.ScaleType.Crop
+
+                UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)}
+                UIGradient.Parent = ImageLabel
+            end
+
             local mainFrame = makeMain()
             local loaderFrame = makeLoader()
             local notifHolder = makeNotifHolder()
@@ -690,6 +725,10 @@ do
             currentPage.Name = "CurrentPage"
             currentPage.Value = 0
             currentPage.Parent = mainFrame.Background.Body
+
+            if special["QueenHomage"] then
+                makeQueen().Parent = mainFrame.Background.Side
+            end
 
             mainFrame.Parent = UI
             loaderFrame.Parent = UI
