@@ -712,6 +712,8 @@ do
 
                 UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)}
                 UIGradient.Parent = ImageLabel
+
+                return Queen
             end
 
             local mainFrame = makeMain()
